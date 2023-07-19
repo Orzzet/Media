@@ -25,7 +25,7 @@ jobs:
         fetch-depth: 0
     - name: Checkout latest release tag
       run: |
-        git checkout {{ inputs.tag }}
+        git checkout {{ inputs.tag/branch }}
   job1:
     needs: job0
     runs-on: ubuntu-latest
