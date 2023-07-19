@@ -2,33 +2,38 @@ name: Deploy
 
 on:
   workflow_dispatch:
+    inputs:
+      client:
+        description: 'Client to deploy. Used for single client deployment.'
+        required: true
+        type: choice
+        options:
+        - piedpiper
+        - other
+      tag/branch:
+        description: 'Tag or branch to deploy'
+        required: true
+        type: environment
 
 jobs:
+  job0:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@master
+      with:
+        fetch-depth: 0
+    - name: Checkout latest release tag
+      run: |
+        git checkout {{ inputs.tag }}
   job1:
+    needs: job0
     runs-on: ubuntu-latest
     environment: preproduction
     steps:
     - run: echo 10
   job2:
     needs: job1
-    runs-on: ubuntu-latest
-    environment: preproduction
-    steps:
-    - run: echo 15
-  job3:
-    needs: job1
-    runs-on: ubuntu-latest
-    environment: preproduction
-    steps:
-    - run: echo 15
-  job4:
-    needs: job2
-    runs-on: ubuntu-latest
-    environment: production
-    steps:
-    - run: echo 15
-  job5:
-    needs: job3
     runs-on: ubuntu-latest
     environment: production
     steps:
