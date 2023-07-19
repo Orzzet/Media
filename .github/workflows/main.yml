@@ -1,0 +1,17 @@
+name: Deploy
+
+on:
+  workflow_dispatch:
+
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    environment: preproduction
+    steps:
+    - run: echo 10
+  job2:
+    needs: job1
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+    - run: echo 15
