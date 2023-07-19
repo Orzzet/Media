@@ -12,6 +12,24 @@ jobs:
   job2:
     needs: job1
     runs-on: ubuntu-latest
+    environment: preproduction
+    steps:
+    - run: echo 15
+  job3:
+    needs: job1
+    runs-on: ubuntu-latest
+    environment: preproduction
+    steps:
+    - run: echo 15
+  job4:
+    needs: job2
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+    - run: echo 15
+  job5:
+    needs: job3
+    runs-on: ubuntu-latest
     environment: production
     steps:
     - run: echo 15
