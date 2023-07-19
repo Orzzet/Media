@@ -10,7 +10,7 @@ on:
         options:
         - piedpiper
         - other
-      tag/branch:
+      tag_branch:
         description: 'Tag or branch to deploy'
         required: true
         type: string
@@ -25,7 +25,7 @@ jobs:
         fetch-depth: 0
     - name: Checkout latest release tag
       run: |
-        git checkout ${{ inputs.tag/branch }}
+        git checkout ${{ inputs.tag_branch }}
   job1:
     needs: job0
     runs-on: ubuntu-latest
